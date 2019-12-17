@@ -9,16 +9,13 @@ namespace WebAddressbookTests
         [Test]
         public void NewContactTest()
         {
-            app.Navigator.OpenHomePage();
-            app.Auth.Login(new AccountData("admin", "secret"));
-            app.Contacts.InitContactCreation();
             ContactData contact = new ContactData("User");
             contact.LastName = "Test";
             contact.Address = "Test Address";
             contact.Telephone = "Tel";
             contact.Email = "Email";
-            app.Contacts.FillContactForm(contact);
-            app.Contacts.SubmitContactCreation();
+
+            app.Contacts.Create(contact);
             app.Navigator.ReturnToHomePage();
             app.Contacts.ViewCreatedContactDetails();
         }
