@@ -9,18 +9,18 @@ namespace WebAddressbookTests
         [Test]
         public void NewContactTest()
         {
-            OpenHomePage();
-            Login(new AccountData("admin", "secret"));
-            InitContactCreation();
+            app.Navigator.OpenHomePage();
+            app.Auth.Login(new AccountData("admin", "secret"));
+            app.Contacts.InitContactCreation();
             ContactData contact = new ContactData("User");
             contact.LastName = "Test";
             contact.Address = "Test Address";
             contact.Telephone = "Tel";
             contact.Email = "Email";
-            FillContactForm(contact);
-            SubmitContactCreation();
-            ReturnToHomePage();
-            ViewCreatedContactDetails();
+            app.Contacts.FillContactForm(contact);
+            app.Contacts.SubmitContactCreation();
+            app.Navigator.ReturnToHomePage();
+            app.Contacts.ViewCreatedContactDetails();
         }
     }
 }
