@@ -25,6 +25,16 @@ namespace WebAddressbookTests
             ReturnToGroupsPage();
             return this;
         }
+        public GroupHelper Modify(int index, GroupData newData)
+        {
+            manager.Navigator.GoToGroupsPage();
+            SelectGroup(index);
+            InitGroupModification();
+            FillGroupForm(newData);
+            SubmitGroupModification();
+            ReturnToGroupsPage();
+            return this;
+        }
 
         public GroupHelper Remove(int index)
         {
@@ -80,6 +90,16 @@ namespace WebAddressbookTests
             return this;
         }
 
+        public GroupHelper SubmitGroupModification()
+        {
+            driver.FindElement(By.Name("update")).Click();
+            return this;
+        }
 
+        public GroupHelper InitGroupModification()
+        {
+            driver.FindElement(By.Name("edit")).Click();
+            return this;
+        }
     }
 }

@@ -16,8 +16,6 @@ namespace WebAddressbookTests
             contact.Email = "Email";
 
             app.Contacts.Create(contact);
-            app.Navigator.ReturnToHomePage();
-            app.Contacts.ViewCreatedContactDetails();
         }
     }
 }
