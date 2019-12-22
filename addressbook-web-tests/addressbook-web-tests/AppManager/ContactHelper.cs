@@ -54,6 +54,7 @@ namespace WebAddressbookTests
 
         public ContactHelper InitContactModification(int index)
         {
+            manager.Navigator.OpenHomePage();
             driver.FindElement(By.XPath("(//img[@alt='Edit'])[" + index + "]")).Click();
             return this;
         }
@@ -67,12 +68,14 @@ namespace WebAddressbookTests
 
         public ContactHelper SelectContact(int index)
         {
+            manager.Navigator.OpenHomePage();
             driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
             return this;
         }
 
         public ContactHelper InitContactCreation()
         {
+            manager.Navigator.OpenHomePage();
             driver.FindElement(By.LinkText("add new")).Click();
             return this;
         }

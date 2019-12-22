@@ -13,7 +13,7 @@ namespace WebAddressbookTests
     public class LoginTests : TestBase
     {
         [Test]
-        public void LoginWithValidCredntials()
+        public void LoginWithValidCredentials()
         {
             app.Auth.Logout();
 
@@ -23,7 +23,7 @@ namespace WebAddressbookTests
         }
 
         [Test]
-        public void LoginWithInvalidCredntials()
+        public void LoginWithInvalidCredentials()
         {
             app.Auth.Logout();
 
