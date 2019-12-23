@@ -18,7 +18,11 @@ namespace WebAddressbookTests
             newData.Header = null;
             newData.Footer = null;
 
-            app.Groups.Modify(1, newData);
+            GroupData group = new GroupData("aaa");
+            group.Header = "ddd";
+            group.Footer = "ccc";
+
+            app.Groups.Modify(1, newData, group);
         }
     }
 }

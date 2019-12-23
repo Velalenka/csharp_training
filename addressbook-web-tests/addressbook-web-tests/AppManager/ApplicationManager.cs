@@ -24,11 +24,12 @@ namespace WebAddressbookTests
         private ApplicationManager()
         {
             driver = new FirefoxDriver();
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(3);
             baseURL = "http://localhost";
 
             loginHelper = new LoginHelper(this);
             navigator = new NavigationHelper(this, baseURL);
-            groupHelper = new GroupHelper(this, baseURL);
+            groupHelper = new GroupHelper(this);
             contactHelper = new ContactHelper(this);
         }
 

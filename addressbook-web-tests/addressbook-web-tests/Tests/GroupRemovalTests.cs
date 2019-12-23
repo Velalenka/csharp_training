@@ -12,6 +12,7 @@ namespace WebAddressbookTests
             GroupData group = new GroupData("aaa");
             group.Header = "ddd";
             group.Footer = "ccc";
+
             app.Groups.Remove(1, group);
         }
     }

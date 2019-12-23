@@ -11,11 +11,9 @@ namespace WebAddressbookTests
 {
     public class GroupHelper: HelperBase
     {
-        private string baseURL;
 
-        public GroupHelper(ApplicationManager manager, string baseURL) : base (manager)
+        public GroupHelper(ApplicationManager manager) : base (manager)
         {
-            this.baseURL = baseURL;
         }
 
         public GroupHelper Create(GroupData group)
@@ -28,10 +26,10 @@ namespace WebAddressbookTests
             ReturnToGroupsPage();
             return this;
         }
-        public GroupHelper Modify(int index, GroupData newData)
+        public GroupHelper Modify(int index, GroupData newData, GroupData group)
         {
             manager.Navigator.GoToGroupsPage();
-            SelectGroup(index);
+            SelectGroup(index, group);
             InitGroupModification();
             FillGroupForm(newData);
             SubmitGroupModification();
@@ -42,17 +40,7 @@ namespace WebAddressbookTests
         public GroupHelper Remove(int index, GroupData group)
         {
             manager.Navigator.GoToGroupsPage();
-
-            if (driver.Url == baseURL + "/addressbook/group.php"
-                && IsElementPresent(By.XPath("(//input[@name='selected[]'])[" + index + "]")))
-            {
-                SelectGroup(index);
-                RemoveGroup();
-                ReturnToGroupsPage();
-                return this;
-            }
-            Create(group);
-            SelectGroup(index);
+            SelectGroup(index, group);
             RemoveGroup();
             ReturnToGroupsPage();
             return this;
@@ -64,10 +52,15 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public GroupHelper SelectGroup(int index)
+        public GroupHelper SelectGroup(int index, GroupData group)
         {
-                driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
-                return this;
+            if (! IsElementPresent(By.XPath("(//input[@name='selected[]'])[" + index + "]")))
+            {
+                Create(group);
+            }
+            
+            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
+            return this;
         }
 
         public GroupHelper SubmitGroupCreation()
