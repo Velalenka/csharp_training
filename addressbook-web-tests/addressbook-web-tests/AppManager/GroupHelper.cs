@@ -9,10 +9,10 @@ using OpenQA.Selenium.Support.UI;
 
 namespace WebAddressbookTests
 {
-    public class GroupHelper: HelperBase
+    public class GroupHelper : HelperBase
     {
 
-        public GroupHelper(ApplicationManager manager) : base (manager)
+        public GroupHelper(ApplicationManager manager) : base(manager)
         {
         }
 
@@ -26,10 +26,9 @@ namespace WebAddressbookTests
             ReturnToGroupsPage();
             return this;
         }
-        public GroupHelper Modify(int index, GroupData newData, GroupData group)
+        public GroupHelper Modify(int index, GroupData newData)
         {
-            manager.Navigator.GoToGroupsPage();
-            SelectGroup(index, group);
+            SelectGroup(index);
             InitGroupModification();
             FillGroupForm(newData);
             SubmitGroupModification();
@@ -37,10 +36,9 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public GroupHelper Remove(int index, GroupData group)
+        public GroupHelper Remove(int index)
         {
-            manager.Navigator.GoToGroupsPage();
-            SelectGroup(index, group);
+            SelectGroup(index);
             RemoveGroup();
             ReturnToGroupsPage();
             return this;
@@ -52,13 +50,19 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public GroupHelper SelectGroup(int index, GroupData group)
+        public GroupHelper CheckGroupPresence(int index, GroupData group)
         {
-            if (! IsElementPresent(By.XPath("(//input[@name='selected[]'])[" + index + "]")))
+            manager.Navigator.GoToGroupsPage();
+            if (IsElementPresent(By.XPath("(//input[@name='selected[]'])[" + index + "]")))
             {
-                Create(group);
+                return this;
             }
-            
+            Create(group);
+            return this;
+        }
+
+        public GroupHelper SelectGroup(int index)
+        {
             driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
             return this;
         }

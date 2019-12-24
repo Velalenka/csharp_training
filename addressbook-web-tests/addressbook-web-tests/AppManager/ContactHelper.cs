@@ -66,6 +66,16 @@ namespace WebAddressbookTests
             return this;
         }
 
+        public ContactHelper CheckContactPresence(int index, ContactData contact)
+        {
+            if (IsElementPresent(By.XPath("(//input[@name='selected[]'])[" + index + "]")))
+            {
+                return this;
+            }
+            Create(contact);
+            return this;
+        }
+
         public ContactHelper SelectContact(int index)
         {
             manager.Navigator.OpenHomePage();

@@ -20,6 +20,13 @@ namespace WebAddressbookTests
             newData.Telephone = "Tel Modified";
             newData.Email = "Email Modified";
 
+            ContactData newContact = new ContactData("User");
+            newContact.LastName = "Test";
+            newContact.Address = "Test Address";
+            newContact.Telephone = "Tel";
+            newContact.Email = "Email";
+
+            app.Contacts.CheckContactPresence(1, newContact);
             app.Contacts.Modify(1, newData);
         }
     }

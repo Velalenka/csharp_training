@@ -9,11 +9,12 @@ namespace WebAddressbookTests
         [Test]
         public void GroupRemovalTest()
         {
-            GroupData group = new GroupData("aaa");
-            group.Header = "ddd";
-            group.Footer = "ccc";
+            GroupData group = new GroupData("test");
+            group.Header = "test header";
+            group.Footer = "test footer";
 
-            app.Groups.Remove(1, group);
+            app.Groups.CheckGroupPresence(1, group);
+            app.Groups.Remove(1);
         }
     }
 }

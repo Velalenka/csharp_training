@@ -22,7 +22,8 @@ namespace WebAddressbookTests
             group.Header = "ddd";
             group.Footer = "ccc";
 
-            app.Groups.Modify(1, newData, group);
+            app.Groups.CheckGroupPresence(1, group);
+            app.Groups.Modify(1, newData);
         }
     }
 }
