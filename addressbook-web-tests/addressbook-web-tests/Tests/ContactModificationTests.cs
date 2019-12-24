@@ -26,7 +26,10 @@ namespace WebAddressbookTests
             newContact.Telephone = "Tel";
             newContact.Email = "Email";
 
-            app.Contacts.CheckContactPresence(1, newContact);
+            if (!app.Contacts.IsContactExists(1))
+            {
+                app.Contacts.Create(newContact);
+            }
             app.Contacts.Modify(1, newData);
         }
     }

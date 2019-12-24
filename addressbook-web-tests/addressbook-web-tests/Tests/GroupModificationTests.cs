@@ -22,7 +22,10 @@ namespace WebAddressbookTests
             group.Header = "ddd";
             group.Footer = "ccc";
 
-            app.Groups.CheckGroupPresence(1, group);
+            if (!app.Groups.IsGroupExists(1))
+            {
+                app.Groups.Create(group);
+            }
             app.Groups.Modify(1, newData);
         }
     }

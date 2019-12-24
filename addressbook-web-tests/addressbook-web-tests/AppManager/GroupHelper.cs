@@ -50,15 +50,14 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public GroupHelper CheckGroupPresence(int index, GroupData group)
+        public bool IsGroupExists(int index)
         {
             manager.Navigator.GoToGroupsPage();
             if (IsElementPresent(By.XPath("(//input[@name='selected[]'])[" + index + "]")))
             {
-                return this;
+                return true;
             }
-            Create(group);
-            return this;
+            return false;
         }
 
         public GroupHelper SelectGroup(int index)

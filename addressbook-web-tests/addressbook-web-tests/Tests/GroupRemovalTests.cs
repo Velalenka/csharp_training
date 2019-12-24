@@ -13,7 +13,10 @@ namespace WebAddressbookTests
             group.Header = "test header";
             group.Footer = "test footer";
 
-            app.Groups.CheckGroupPresence(1, group);
+            if (!app.Groups.IsGroupExists(1))
+            {
+                app.Groups.Create(group);
+            }
             app.Groups.Remove(1);
         }
     }
