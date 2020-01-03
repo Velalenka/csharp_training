@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -20,6 +21,7 @@ namespace WebAddressbookTests
             InitContactCreation();
             FillContactForm(contact);
             SubmitContactCreation();
+            ReturnToHomePage();
             return this;
         }
 
@@ -42,7 +44,7 @@ namespace WebAddressbookTests
 
         public ContactHelper ReturnToHomePage()
         {
-            driver.FindElement(By.LinkText("home page")).Click();
+            driver.FindElement(By.LinkText("home")).Click();
             return this;
         }
 
@@ -55,7 +57,7 @@ namespace WebAddressbookTests
         public ContactHelper InitContactModification(int index)
         {
             manager.Navigator.OpenHomePage();
-            driver.FindElement(By.XPath("(//img[@alt='Edit'])[" + index + "]")).Click();
+            driver.FindElement(By.XPath("(//img[@alt='Edit'])[" + (index + 1) + "]")).Click();
             return this;
         }
 
@@ -68,7 +70,7 @@ namespace WebAddressbookTests
 
         public bool IsContactExists(int index)
         {
-            if (IsElementPresent(By.XPath("(//input[@name='selected[]'])[" + index + "]")))
+            if (IsElementPresent(By.XPath("(//input[@name='selected[]'])[" + (index + 1) + "]")))
             {
                 return true;
             }
@@ -78,7 +80,7 @@ namespace WebAddressbookTests
         public ContactHelper SelectContact(int index)
         {
             manager.Navigator.OpenHomePage();
-            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
+            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + (index + 1) + "]")).Click();
             return this;
         }
 
@@ -108,6 +110,18 @@ namespace WebAddressbookTests
         public void ViewCreatedContactDetails()
         {
             driver.FindElement(By.XPath("//img[@alt='Details']")).Click();
+        }
+
+        public List<ContactData> GetContactList()
+        {
+            List<ContactData> contacts = new List<ContactData>();
+            ReturnToHomePage();
+            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("td:nth-child(3)"));
+            foreach (IWebElement element in elements)
+            {
+                contacts.Add(new ContactData(element.Text, element.Text));
+            }
+            return contacts;
         }
     }
 }

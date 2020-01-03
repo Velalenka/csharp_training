@@ -22,11 +22,19 @@ namespace WebAddressbookTests
             group.Header = "ddd";
             group.Footer = "ccc";
 
-            if (!app.Groups.IsGroupExists(1))
+            List<GroupData> oldGroups = app.Groups.GetGroupList();
+           
+            if (!app.Groups.IsGroupExists(0))
             {
                 app.Groups.Create(group);
             }
-            app.Groups.Modify(1, newData);
+            app.Groups.Modify(0, newData);
+
+            List<GroupData> newGroups = app.Groups.GetGroupList();
+            oldGroups[0].Name = newData.Name;
+            oldGroups.Sort();
+            newGroups.Sort();
+            Assert.AreEqual(oldGroups, newGroups);
         }
     }
 }
