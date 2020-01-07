@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
@@ -12,6 +13,8 @@ namespace WebAddressbookTests
 {
     public class ContactHelper : HelperBase
     {
+        private ReadOnlyCollection<IWebElement> cells;
+
         public ContactHelper(ApplicationManager manager) : base(manager)
         {
         }
@@ -116,10 +119,11 @@ namespace WebAddressbookTests
         {
             List<ContactData> contacts = new List<ContactData>();
             ReturnToHomePage();
-            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("td:nth-child(3)"));
+            ICollection<IWebElement> elements = driver.FindElements(By.Name("entry"));
             foreach (IWebElement element in elements)
             {
-                contacts.Add(new ContactData(element.Text, element.Text));
+                cells = element.FindElements(By.TagName("td"));
+                contacts.Add(new ContactData(cells[2].Text, cells[1].Text));
             }
             return contacts;
         }

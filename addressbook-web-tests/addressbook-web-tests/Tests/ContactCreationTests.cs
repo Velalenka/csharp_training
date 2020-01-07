@@ -10,7 +10,7 @@ namespace WebAddressbookTests
         [Test]
         public void NewContactTest()
         {
-            ContactData contact = new ContactData("User", "Test");
+            ContactData contact = new ContactData("User", "Test LastName");
             contact.Address = "Test Address";
             contact.Telephone = "Tel";
             contact.Email = "Email";
