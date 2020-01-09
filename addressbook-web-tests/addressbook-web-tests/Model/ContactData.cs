@@ -22,11 +22,11 @@ namespace WebAddressbookTests
 
         public bool Equals(ContactData other)
         {
-            if (Object.ReferenceEquals(other, null))
+            if (Object.ReferenceEquals(other, null)) //сравнение с объектом, который равен null
             {
                 return false;
             }
-            if (Object.ReferenceEquals(this, other))
+            if (Object.ReferenceEquals(this, other)) //сравнение объекта самого с собой
             {
                 return true;
             }
@@ -40,7 +40,7 @@ namespace WebAddressbookTests
 
         public override string ToString()
         {
-            return Name;
+            return Name; //возвращает строковое представление объектов типа GroupData
         }
 
         public int CompareTo(ContactData other)
@@ -49,7 +49,13 @@ namespace WebAddressbookTests
             {
                 return 1;
             }
-            return Name.CompareTo(other.Name);
+
+            if (LastName.CompareTo(other.LastName) == 0)
+            {
+                return Name.CompareTo(other.Name);
+            }
+
+            return LastName.CompareTo(other.LastName);
         }
 
         public string Name
