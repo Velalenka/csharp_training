@@ -54,6 +54,7 @@ namespace WebAddressbookTests
         public ContactHelper SubmitContactModification()
         {
             driver.FindElement(By.Name("update")).Click();
+            ContactCache = null;
             return this;
         }
 
@@ -68,6 +69,7 @@ namespace WebAddressbookTests
         {
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
             driver.SwitchTo().Alert().Accept();
+            ContactCache = null;
             return this;
         }
 
@@ -107,6 +109,7 @@ namespace WebAddressbookTests
         public ContactHelper SubmitContactCreation()
         {
             driver.FindElement(By.Name("submit")).Click();
+            ContactCache = null;
             return this;
         }
 
@@ -115,17 +118,26 @@ namespace WebAddressbookTests
             driver.FindElement(By.XPath("//img[@alt='Details']")).Click();
         }
 
+        private List<ContactData> ContactCache = null;
+
         public List<ContactData> GetContactList()
         {
-            List<ContactData> contacts = new List<ContactData>();
-            ReturnToHomePage();
-            ICollection<IWebElement> elements = driver.FindElements(By.Name("entry"));
-            foreach (IWebElement element in elements)
+            if (ContactCache == null)
             {
-                cells = element.FindElements(By.TagName("td"));
-                contacts.Add(new ContactData(cells[2].Text, cells[1].Text));
+                ReturnToHomePage();
+                ICollection<IWebElement> elements = driver.FindElements(By.Name("entry"));
+                foreach (IWebElement element in elements)
+                {
+                    cells = element.FindElements(By.TagName("td"));
+                    ContactCache.Add(new ContactData(cells[2].Text, cells[1].Text));
+                }
             }
-            return contacts;
+            return new List<ContactData>(ContactCache);
+        }
+
+        public int GetContactCount()
+        {
+            return driver.FindElements(By.Name("entry")).Count;
         }
     }
 }
