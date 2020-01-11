@@ -129,7 +129,10 @@ namespace WebAddressbookTests
                 foreach (IWebElement element in elements)
                 {
                     cells = element.FindElements(By.TagName("td"));
-                    ContactCache.Add(new ContactData(cells[2].Text, cells[1].Text));
+                    ContactCache.Add(new ContactData(cells[2].Text, cells[1].Text)
+                    {
+                        Id = element.FindElement(By.TagName("input")).GetAttribute("value")
+                    });
                 }
             }
             return new List<ContactData>(ContactCache);

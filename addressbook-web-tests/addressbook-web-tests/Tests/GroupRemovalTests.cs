@@ -10,15 +10,15 @@ namespace WebAddressbookTests
         [Test]
         public void GroupRemovalTest()
         {
-            GroupData group = new GroupData("test");
-            group.Header = "test header";
-            group.Footer = "test footer";
+            GroupData newGroup = new GroupData("test");
+            newGroup.Header = "test header";
+            newGroup.Footer = "test footer";
 
             List<GroupData> oldGroups = app.Groups.GetGroupList();
 
             if (!app.Groups.IsGroupExists(0))
             {
-                app.Groups.Create(group);
+                app.Groups.Create(newGroup);
             }
             app.Groups.Remove(0);
 
@@ -26,8 +26,14 @@ namespace WebAddressbookTests
 
             List<GroupData> newGroups = app.Groups.GetGroupList();
 
+            GroupData toBeRemoved = oldGroups[0];
             oldGroups.RemoveAt(0);
             Assert.AreEqual(oldGroups, newGroups);
+
+            foreach (GroupData group in newGroups)
+            {
+                Assert.AreNotEqual(group.Id, toBeRemoved.Id);
+            }
         }
     }
 }

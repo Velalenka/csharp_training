@@ -25,6 +25,7 @@ namespace WebAddressbookTests
             newContact.Email = "Email";
 
             List<ContactData> oldContacts = app.Contacts.GetContactList();
+            ContactData oldData = oldContacts[0];
 
             if (!app.Contacts.IsContactExists(0))
             {
@@ -40,6 +41,14 @@ namespace WebAddressbookTests
             oldContacts.Sort();
             newContacts.Sort();
             Assert.AreEqual(oldContacts, newContacts);
+
+            foreach (ContactData contact in newContacts)
+            {
+                if (contact.Id == oldData.Id)
+                {
+                    Assert.AreEqual(newData.Name, contact.Name);
+                }
+            }
         }
     }
 }
