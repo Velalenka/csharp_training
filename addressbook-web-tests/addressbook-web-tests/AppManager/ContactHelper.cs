@@ -42,6 +42,7 @@ namespace WebAddressbookTests
             SubmitContactModification();
             ReturnToHomePage();
             ViewCreatedContactDetails();
+            ReturnToHomePage();
             return this;
         }
 
@@ -69,6 +70,7 @@ namespace WebAddressbookTests
         {
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
             driver.SwitchTo().Alert().Accept();
+            ReturnToHomePage();
             ContactCache = null;
             return this;
         }
@@ -124,7 +126,7 @@ namespace WebAddressbookTests
         {
             if (ContactCache == null)
             {
-                ReturnToHomePage();
+                ContactCache = new List<ContactData>();
                 ICollection<IWebElement> elements = driver.FindElements(By.Name("entry"));
                 foreach (IWebElement element in elements)
                 {
