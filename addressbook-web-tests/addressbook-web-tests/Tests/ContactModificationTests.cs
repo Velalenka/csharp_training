@@ -16,12 +16,16 @@ namespace WebAddressbookTests
         {
             ContactData newData = new ContactData("User Modified", "Test Modified");
             newData.Address = "Test Address Modified";
-            newData.Telephone = "Tel Modified";
+            newData.HomePhone = "+37529-000";
+            newData.MobilePhone = "37529-001";
+            newData.WorkPhone = "37529-002";
             newData.Email = "Email Modified";
 
             ContactData newContact = new ContactData("User", "Test");
             newContact.Address = "Test Address";
-            newContact.Telephone = "Tel";
+            newContact.HomePhone = "+37529-888";
+            newContact.MobilePhone = "37529-889";
+            newContact.WorkPhone = "37529-887";
             newContact.Email = "Email";
 
             List<ContactData> oldContacts = app.Contacts.GetContactList();

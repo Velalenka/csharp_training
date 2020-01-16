@@ -12,7 +12,7 @@ namespace WebAddressbookTests
         {
             ContactData newContact = new ContactData("User", "Test");
             newContact.Address = "Test Address";
-            newContact.Telephone = "Tel";
+            newContact.HomePhone = "Tel";
             newContact.Email = "Email";
 
             List<ContactData> oldContacts = app.Contacts.GetContactList();
