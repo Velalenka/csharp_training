@@ -24,12 +24,13 @@ namespace WebAddressbookTests
             string lastName = cells[1].Text;
             string firstName = cells[2].Text;
             string address = cells[3].Text;
-
+            string email = cells[4].Text;
             string allPhones = cells[5].Text;
 
             return new ContactData(firstName, lastName)
             {
                 Address = address,
+                Email = email,
                 AllPhones = allPhones
             };
         }
@@ -50,6 +51,7 @@ namespace WebAddressbookTests
             return new ContactData(firstName, lastName)
             {
                 Address = address,
+                Email = email,
                 HomePhone = homePhone,
                 MobilePhone = mobilePhone,
                 WorkPhone = workPhone
