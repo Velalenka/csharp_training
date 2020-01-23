@@ -13,13 +13,13 @@ namespace WebAddressbookTests
         [Test]
         public void TestContactInformation()
         {
-            ContactData fromTable = app.Contacts.GetContactInforamtionFromTable(2);
-            ContactData fromForm = app.Contacts.GetContactInforamtionFromEditForm(2);
+            ContactData fromTable = app.Contacts.GetContactInforamtionFromTable(0);
+            ContactData fromForm = app.Contacts.GetContactInforamtionFromEditForm(0);
 
             Assert.AreEqual(fromTable, fromForm);
             Assert.AreEqual(fromTable.Address, fromForm.Address);
             Assert.AreEqual(fromTable.AllPhones, fromForm.AllPhones);
-            Assert.AreEqual(fromTable.Email, fromForm.Email);
+            Assert.AreEqual(fromTable.AllEmails, fromForm.AllEmails);
         }
 
     }
