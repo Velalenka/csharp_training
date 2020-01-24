@@ -10,6 +10,14 @@ namespace WebAddressbookTests
     {
         private string allPhones;
         private string allEmails;
+        private string homePhone;
+        private string mobilePhone;
+        private string workPhone;
+        private string email;
+        private string email2;
+        private string email3;
+
+        private bool checkString = false;
 
         public ContactData(string name, string lastName)
         {
@@ -40,6 +48,13 @@ namespace WebAddressbookTests
             return Name; //возвращает строковое представление объектов типа GroupData
         }
 
+        public string AllFieldsToString()
+        {
+            checkString = true;
+            return Name + " " + MiddleName + " " + LastName + "\r\n" + Address + "\r\n" + "\r\n" + HomePhone + MobilePhone + WorkPhone + 
+                Email + Email2 + Email3;
+        }
+
         public int CompareTo(ContactData other)
         {
             if (Object.ReferenceEquals(other, null))
@@ -59,13 +74,66 @@ namespace WebAddressbookTests
 
         public string LastName { get; set; }
 
+        public string MiddleName { get; set; }
+
         public string Address { get; set; }
 
-        public string HomePhone { get; set; }
+        public string HomePhone 
+        {
+            get
+            {
+                if (checkString)
+                {
+                    return "H: " + homePhone + "\r\n";
+                }
+                else
+                {
+                    return homePhone;
+                }
+            }
+            set
+            {
+                homePhone = value;
+            }
+        }
 
-        public string MobilePhone { get; set; }
+        public string MobilePhone
+        {
+            get
+            {
+                if (checkString)
+                {
+                    return "M: " + mobilePhone + "\r\n";
+                }
+                else
+                {
+                    return mobilePhone;
+                }
+            }
+            set
+            {
+                mobilePhone = value;
+            }
+        }
 
-        public string WorkPhone { get; set; }
+        public string WorkPhone
+        {
+            get
+            {
+                if (checkString)
+                {
+                    return "W: " + workPhone + "\r\n" + "\r\n";
+                }
+                else
+                {
+                    return workPhone;
+                }
+            }
+            set
+            {
+                workPhone = value;
+            }
+        }
 
         public string AllPhones
         {
@@ -98,11 +166,62 @@ namespace WebAddressbookTests
             }
         }
 
-        public string Email { get; set; }
+        public string Email
+        {
+            get
+            {
+                if (checkString)
+                {
+                    return email + "\r\n";
+                }
+                else
+                {
+                    return email;
+                }
+            }
+            set
+            {
+                email = value;
+            }
+        }
 
-        public string Email2 { get; set; }
+        public string Email2
+        {
+            get
+            {
+                if (checkString)
+                {
+                    return email2 + "\r\n";
+                }
+                else
+                {
+                    return email2;
+                }
+            }
+            set
+            {
+                email2 = value;
+            }
+        }
 
-        public string Email3 { get; set; }
+        public string Email3
+        {
+            get
+            {
+                if (checkString)
+                {
+                    return email3;
+                }
+                else
+                {
+                    return email3;
+                }
+            }
+            set
+            {
+                email3 = value;
+            }
+        }
 
         public string AllEmails
         {
