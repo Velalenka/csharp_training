@@ -45,7 +45,9 @@ namespace WebAddressbookTests
 
         public override string ToString()
         {
-            return Name; //возвращает строковое представление объектов типа GroupData
+            return "name=" + Name + "\nlastName= " + LastName + "\nmiddleName= " + MiddleName + "\naddress= " + Address + 
+                "\nhomePhone= " + HomePhone + "\nmobilePhone= " + MobilePhone +"\nworkPhone= " + WorkPhone + 
+                "\nemail= " + Email + "\nemail2= " + Email2 + "\nemail3= " + Email3; //возвращает строковое представление объектов типа GroupData
         }
 
         public string AllFieldsToString()
