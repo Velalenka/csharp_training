@@ -19,6 +19,10 @@ namespace WebAddressbookTests
 
         private bool checkString = false;
 
+        public ContactData()
+        {
+        }
+
         public ContactData(string name, string lastName)
         {
             Name = name;

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfGroupData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <GroupData>
+    <Name>FT4R'</Name>
+    <Header>K)K+$1[</Header>
+    <Footer>Y^`Z</Footer>
+  </GroupData>
+  <GroupData>
+    <Name>G</Name>
+    <Header>3</Header>
+    <Footer />
+  </GroupData>
+</ArrayOfGroupData>

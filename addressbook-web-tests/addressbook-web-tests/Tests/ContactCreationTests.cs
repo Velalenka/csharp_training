@@ -1,5 +1,8 @@
 ﻿using NUnit.Framework;
 using System.Collections.Generic;
+using System.IO;
+using System.Xml.Serialization;
+using System.Xml;
 
 namespace WebAddressbookTests
 {
@@ -26,16 +29,15 @@ namespace WebAddressbookTests
             return contacts;
         }
 
-        [Test, TestCaseSource("RandomContactDataProvider")]
+        public static IEnumerable<ContactData> ContactDataFromXmlFile()
+        {
+            return (List<ContactData>) new XmlSerializer(typeof(List<ContactData>))
+                .Deserialize(new StreamReader(@"contacts2.xml"));
+        }
+
+        [Test, TestCaseSource("ContactDataFromXmlFile")]
         public void NewContactTest(ContactData contact)
         {
-            //ContactData contact = new ContactData("User", "Test LastName");
-            //contact.Address = "Test Address";
-            //contact.HomePhone = "+37529-888";
-            //contact.MobilePhone = "37529-889";
-            //contact.WorkPhone = "37529-887";
-            //contact.Email = "Email";
-
             List<ContactData> oldContacts = app.Contacts.GetContactList();
 
             app.Contacts.Create(contact);
