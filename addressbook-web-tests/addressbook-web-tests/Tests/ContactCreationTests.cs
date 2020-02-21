@@ -31,8 +31,9 @@ namespace WebAddressbookTests
 
         public static IEnumerable<ContactData> ContactDataFromXmlFile()
         {
-            return (List<ContactData>) new XmlSerializer(typeof(List<ContactData>))
-                .Deserialize(new StreamReader(@"contacts2.xml"));
+            return (List<ContactData>)new XmlSerializer(typeof(List<ContactData>))
+                .Deserialize(new StreamReader("E:\\Trainings\\CforQABarancev\\git\\csharp_training\\addressbook-web-tests" +
+                "\\addressbook-web-tests\\сontacts2.xml"));
         }
 
         [Test, TestCaseSource("ContactDataFromXmlFile")]
