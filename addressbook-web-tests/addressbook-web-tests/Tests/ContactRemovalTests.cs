@@ -15,19 +15,19 @@ namespace WebAddressbookTests
             newContact.HomePhone = "Tel";
             newContact.Email = "Email";
 
-            List<ContactData> oldContacts = app.Contacts.GetContactList();
+            List<ContactData> oldContacts = ContactData.GetAll();
+            ContactData toBeRemoved = oldContacts[0];
 
             if (!app.Contacts.IsContactExists(0))
             {
                 app.Contacts.Create(newContact);
             }
-            app.Contacts.Remove(0);
+            app.Contacts.Remove(toBeRemoved);
 
             Assert.AreEqual(oldContacts.Count - 1, app.Contacts.GetContactCount());
 
-            List<ContactData> newContacts = app.Contacts.GetContactList();
+            List<ContactData> newContacts = ContactData.GetAll();
 
-            ContactData toBeRemoved = oldContacts[0];
             oldContacts.RemoveAt(0);
             Assert.AreEqual(oldContacts, newContacts);
 

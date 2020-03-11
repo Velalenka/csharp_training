@@ -28,18 +28,18 @@ namespace WebAddressbookTests
             newContact.WorkPhone = "37529-887";
             newContact.Email = "Email";
 
-            List<ContactData> oldContacts = app.Contacts.GetContactList();
+            List<ContactData> oldContacts = ContactData.GetAll();
             ContactData oldData = oldContacts[0];
 
             if (!app.Contacts.IsContactExists(0))
             {
                 app.Contacts.Create(newContact);
             }
-            app.Contacts.Modify(0, newData);
+            app.Contacts.Modify(oldData, newData);
 
             Assert.AreEqual(oldContacts.Count, app.Contacts.GetContactCount());
 
-            List<ContactData> newContacts = app.Contacts.GetContactList();
+            List<ContactData> newContacts = ContactData.GetAll();
             oldContacts[0].Name = newData.Name;
             oldContacts[0].LastName = newData.LastName;
             oldContacts.Sort();

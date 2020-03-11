@@ -91,9 +91,27 @@ namespace WebAddressbookTests
             return this;
         }
 
+        public ContactHelper Remove(ContactData contact)
+        {
+            SelectContact(contact.Id);
+            RemoveContact();
+            return this;
+        }
+
         public ContactHelper Modify(int index, ContactData newData)
         {
             InitContactModification(index);
+            FillContactForm(newData);
+            SubmitContactModification();
+            ReturnToHomePage();
+            ViewCreatedContactDetails();
+            ReturnToHomePage();
+            return this;
+        }
+
+        public ContactHelper Modify(ContactData contact, ContactData newData)
+        {
+            InitContactModification(contact.Id);
             FillContactForm(newData);
             SubmitContactModification();
             ReturnToHomePage();
@@ -123,6 +141,14 @@ namespace WebAddressbookTests
                 .FindElement(By.TagName("a")).Click();
             return this;
         }
+
+        public ContactHelper InitContactModification(String id)
+        {
+            manager.Navigator.OpenHomePage();
+            driver.FindElement(By.XPath("//*[@name='entry']//*[contains(local-name(),'td')][8]//a[contains(@href,'" + id + "')]")).Click();
+            return this;
+        }
+
 
         public ContactHelper SelectContactDetails(int index)
         {
@@ -155,6 +181,13 @@ namespace WebAddressbookTests
         {
             manager.Navigator.OpenHomePage();
             driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + (index + 1) + "]")).Click();
+            return this;
+        }
+
+        public ContactHelper SelectContact(String id)
+        {
+            manager.Navigator.OpenHomePage();
+            driver.FindElement(By.XPath("(//input[@name='selected[]' and @value='"+id+"'])")).Click();
             return this;
         }
 
