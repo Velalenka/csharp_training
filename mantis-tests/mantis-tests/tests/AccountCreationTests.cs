@@ -26,9 +26,9 @@ namespace mantis_tests
         {
             AccountData account = new AccountData()
             {
-                Name = "testuser04",
+                Name = "testuser08",
                 Password = "password",
-                Email = "testuser04@localhost.localdomain"
+                Email = "testuser08@localhost.localdomain"
             };
 
             app.James.Delete(account);
