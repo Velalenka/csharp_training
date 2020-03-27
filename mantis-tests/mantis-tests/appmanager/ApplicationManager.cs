@@ -18,6 +18,7 @@ namespace mantis_tests
         public FtpHelper FtpHelper { get; set; }
         public JamesHelper James { get; set; }
         public MailHelper MailHelper { get; set; }
+        public AdminHelper Admin { get; set; }
 
         private static ThreadLocal<ApplicationManager> app = new ThreadLocal<ApplicationManager>();
 
@@ -30,6 +31,7 @@ namespace mantis_tests
             FtpHelper = new FtpHelper(this);
             James = new JamesHelper(this);
             MailHelper = new MailHelper(this);
+            Admin = new AdminHelper(this, baseURL);
         }
 
         ~ApplicationManager()
@@ -49,7 +51,7 @@ namespace mantis_tests
             if (!app.IsValueCreated)
             {
                 ApplicationManager newInstance = new ApplicationManager();
-                newInstance.driver.Url = "http://localhost/mantisbt-2.24.0/login_page.php";
+                newInstance.driver.Url = newInstance.baseURL + "/mantisbt-2.24.0/login_page.php";
                 app.Value = newInstance;
 
             }

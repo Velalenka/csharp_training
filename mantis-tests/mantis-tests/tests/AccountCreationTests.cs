@@ -26,10 +26,17 @@ namespace mantis_tests
         {
             AccountData account = new AccountData()
             {
-                Name = "testuser08",
+                Name = "testuser09",
                 Password = "password",
-                Email = "testuser08@localhost.localdomain"
+                Email = "testuser09@localhost.localdomain"
             };
+
+            List<AccountData> accounts = app.Admin.GetAllAccounts();
+            AccountData existingAccount = accounts.Find(x=>x.Name == account.Name);
+            if (existingAccount != null)
+            {
+                app.Admin.DeleteAccount(existingAccount);
+            }
 
             app.James.Delete(account);
             app.James.Add(account);

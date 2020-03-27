@@ -9,7 +9,7 @@ namespace mantis_project_tests
         public static IEnumerable<ProjectData> RandomProjectDataProvider()
         {
             List<ProjectData> projects = new List<ProjectData>();
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 3; i++)
             {
                 projects.Add(new ProjectData(GenerateRandomString(30))
                 {
@@ -26,15 +26,13 @@ namespace mantis_project_tests
             if (!app.Projects.IsProjectExists(0))
             {
                 app.Projects.Create(project);
+                oldProjects.Add(project);
             }
             app.Projects.Remove(0);
 
             List<ProjectData> newProjects = app.Projects.GetProjectsList();
 
-            if (oldProjects.Count > 0)
-            {
-                oldProjects.RemoveAt(0);
-            }
+            oldProjects.RemoveAt(0);
             Assert.AreEqual(oldProjects, newProjects);
         }
     }

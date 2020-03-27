@@ -23,18 +23,20 @@ namespace mantis_project_tests
             }
             return projects;
         }
-
-        [Test, TestCaseSource("RandomProjectDataProvider")]
-        public void TestProjectCreation(ProjectData project)
+        //[Test, TestCaseSource("RandomProjectDataProvider")]
+        //public void TestProjectCreation(ProjectData project)
+        [Test]
+        public void TestProjectCreation()
         {
+            ProjectData newPr = new ProjectData("test767");
             List<ProjectData> oldProjects = app.Projects.GetProjectsList();
 
-            app.Projects.Create(project);
+            app.Projects.Create(newPr);
 
             Assert.AreEqual(oldProjects.Count + 1, app.Projects.GetProjectCount());
 
             List<ProjectData> newProjects = app.Projects.GetProjectsList();
-            oldProjects.Add(project);
+            oldProjects.Add(newPr);
             oldProjects.Sort();
             newProjects.Sort();
             Assert.AreEqual(oldProjects, newProjects);

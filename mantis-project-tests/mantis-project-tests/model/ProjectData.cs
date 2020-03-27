@@ -28,6 +28,11 @@ namespace mantis_project_tests
             return this.Name.Equals(other.Name);
         }
 
+        public override string ToString()
+        {
+            return "name=" + Name;
+        }
+
         public string Name { get; set; }
     }
 }
