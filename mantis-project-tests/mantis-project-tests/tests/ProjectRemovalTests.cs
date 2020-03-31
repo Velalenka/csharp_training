@@ -21,11 +21,17 @@ namespace mantis_project_tests
         [Test, TestCaseSource("RandomProjectDataProvider")]
         public void TestProjectRemoval(ProjectData project)
         {
+            AccountData account = new AccountData()
+            {
+                Username = "administrator",
+                Password = "root"
+            };
+
             List<ProjectData> oldProjects = app.Projects.GetProjectsList();
 
             if (!app.Projects.IsProjectExists(0))
             {
-                app.Projects.Create(project);
+                app.API.CreateNewProject(account, project);
                 oldProjects.Add(project);
             }
             app.Projects.Remove(0);

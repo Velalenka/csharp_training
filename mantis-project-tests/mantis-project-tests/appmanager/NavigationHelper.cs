@@ -29,11 +29,6 @@ namespace mantis_project_tests
 
         public void GoToProjectsPage()
         {
-            if (driver.Url == baseURL + "/mantisbt-2.24.0/manage_proj_page.php"
-                && IsElementPresent(By.CssSelector("div.widget-toolbox.padding-8.clearfix button")))
-            {
-                return;
-            }
             driver.FindElement(By.CssSelector("a[href$='mantisbt-2.24.0/manage_overview_page.php']")).Click();
             driver.FindElement(By.LinkText("Manage Projects")).Click();
         }

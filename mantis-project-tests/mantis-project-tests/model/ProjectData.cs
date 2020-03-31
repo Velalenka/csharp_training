@@ -8,31 +8,42 @@ namespace mantis_project_tests
 {
     public class ProjectData : IEquatable<ProjectData>, IComparable<ProjectData>
     {
-        public ProjectData(string name)
+        public ProjectData(string n)
         {
-            Name = name;
+            name = n;
+        }
+
+        public ProjectData(Mantis.ProjectData newData)
+        {
+            name = newData.name;
+            id = newData.id;
+        }
+
+        public ProjectData()
+        {
         }
 
         public override int GetHashCode()
         {
-                return Name.GetHashCode();
+            return name.GetHashCode();
         }
 
         public int CompareTo(ProjectData other)
         {
-            return this.Name.CompareTo(other.Name);
+            return this.name.CompareTo(other.name);
         }
 
         public bool Equals(ProjectData other)
         {
-            return this.Name.Equals(other.Name);
+            return this.name.Equals(other.name);
         }
 
         public override string ToString()
         {
-            return "name=" + Name;
+            return "name=" + name;
         }
 
-        public string Name { get; set; }
+        public string name { get; set; }
+        public string id { get; set; }
     }
 }

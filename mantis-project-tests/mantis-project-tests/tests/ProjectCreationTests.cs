@@ -10,12 +10,12 @@ using System.Linq;
 namespace mantis_project_tests
 {
     [TestFixture]
-    public class ProjectCreationTests : AuthTestBase
+    public class ProjectCreationTests : TestBase
     {
         public static IEnumerable<ProjectData> RandomProjectDataProvider()
         {
             List<ProjectData> projects = new List<ProjectData>();
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 2; i++)
             {
                 projects.Add(new ProjectData(GenerateRandomString(30))
                 {
@@ -23,20 +23,23 @@ namespace mantis_project_tests
             }
             return projects;
         }
-        //[Test, TestCaseSource("RandomProjectDataProvider")]
-        //public void TestProjectCreation(ProjectData project)
-        [Test]
-        public void TestProjectCreation()
+
+        [Test, TestCaseSource("RandomProjectDataProvider")]
+        public void AddNewProjectTest2(ProjectData project)
         {
-            ProjectData newPr = new ProjectData("test767");
-            List<ProjectData> oldProjects = app.Projects.GetProjectsList();
+            AccountData account = new AccountData()
+            {
+                Username = "administrator",
+                Password = "root"
+            };
 
-            app.Projects.Create(newPr);
+            List<ProjectData> oldProjects = app.API.GetProjectsList(account);
+            app.API.CreateNewProject(account, project);
 
-            Assert.AreEqual(oldProjects.Count + 1, app.Projects.GetProjectCount());
+            Assert.AreEqual(oldProjects.Count + 1, app.API.GetProjectsList(account).Count);
 
-            List<ProjectData> newProjects = app.Projects.GetProjectsList();
-            oldProjects.Add(newPr);
+            List<ProjectData> newProjects = app.API.GetProjectsList(account);
+            oldProjects.Add(project);
             oldProjects.Sort();
             newProjects.Sort();
             Assert.AreEqual(oldProjects, newProjects);

@@ -44,7 +44,7 @@ namespace mantis_project_tests
 
         public ProjectHelper FillProjectForm(ProjectData project)
         {
-            Type(By.Id("project-name"), project.Name);
+            Type(By.Id("project-name"), project.name);
             return this;
         }
 
