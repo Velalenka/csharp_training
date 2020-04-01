@@ -27,7 +27,7 @@ namespace mantis_project_tests
                 Password = "root"
             };
 
-            List<ProjectData> oldProjects = app.Projects.GetProjectsList();
+            List<ProjectData> oldProjects = app.API.GetProjectsList(account);
 
             if (!app.Projects.IsProjectExists(0))
             {
@@ -36,7 +36,7 @@ namespace mantis_project_tests
             }
             app.Projects.Remove(0);
 
-            List<ProjectData> newProjects = app.Projects.GetProjectsList();
+            List<ProjectData> newProjects = app.API.GetProjectsList(account);
 
             oldProjects.RemoveAt(0);
             Assert.AreEqual(oldProjects, newProjects);
